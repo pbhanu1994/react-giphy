@@ -13,5 +13,5 @@ export function trendingGiphs() {
 }
 
 export function searchGiphs(searchTerm) {
-  return http.post(`${searchApiEndPoint}?api_key=${apiKey}&q=${searchTerm}`);
+  return http.get(`${searchApiEndPoint}?api_key=${apiKey}&q=${searchTerm}`);
 }
