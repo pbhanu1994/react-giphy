@@ -78,7 +78,7 @@ class Giphys extends Component {
         <center>
           <h2>Giphys</h2>
           <SearchBox searchTerm={searchTerm} onChange={this.handleSearch} />
-          {this.renderGiphCards()}
+          <div className="giphCards">{this.renderGiphCards()}</div>
         </center>
       </React.Fragment>
     );

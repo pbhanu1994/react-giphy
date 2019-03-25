@@ -16,9 +16,11 @@ const WelcomeScreen = ({ location }) => {
           <h1 className="display-4">GiphyApp!</h1>
           <h2>Hello, {username}!</h2>
 
-          <p className="lead">This is a simple React Front-end application</p>
+          <p className="lead">
+            This is a simple React Front-end application for showing Gif images
+          </p>
           <hr className="my-4" />
-          <p>These are the trending Gif images provided by giphy.com.</p>
+          <p>Note: These are the trending Gif images provided by giphy.com.</p>
           <h4> Are you excited?</h4>
           <Link
             to={{
@@ -27,7 +29,7 @@ const WelcomeScreen = ({ location }) => {
                 username: username
               }
             }}
-            className="btn btn-info btn-lg"
+            className="btn btn-warning btn-lg"
           >
             Get Started
           </Link>

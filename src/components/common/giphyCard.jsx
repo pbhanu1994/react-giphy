@@ -2,7 +2,10 @@ import React from "react";
 
 const GiphyCard = ({ id, title, giphyUrl }) => {
   return (
-    <div className="card" style={{ width: "18rem", float: "left" }}>
+    <div
+      className="card"
+      style={{ width: "18rem", height: "400px", float: "left" }}
+    >
       <figure>
         <img src={giphyUrl} className="card-img-top" alt={id} />
       </figure>
