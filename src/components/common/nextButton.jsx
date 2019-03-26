@@ -5,7 +5,14 @@ const NextButton = ({ nextPage }) => {
     <button
       onClick={nextPage}
       type="button"
-      className="btn btn-lg btn-warning m-5"
+      style={{
+        float: "left",
+        clear: "both",
+        marginLeft: "30%",
+        marginTop: "10px",
+        marginBottom: "10px"
+      }}
+      className="btn btn-lg btn-warning"
     >
       <b>Load More</b>
     </button>

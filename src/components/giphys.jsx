@@ -120,9 +120,7 @@ class Giphys extends Component {
           <SearchBox searchTerm={searchTerm} onChange={this.handleSearch} />
           <div style={{ marginTop: "5px" }} className="giphCards">
             {this.renderGiphCards()}
-            <center>
-              <NextButton nextPage={this.handleNextPage} />
-            </center>
+            <NextButton nextPage={this.handleNextPage} />
           </div>
         </center>
       </React.Fragment>

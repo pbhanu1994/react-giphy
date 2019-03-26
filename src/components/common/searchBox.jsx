@@ -5,7 +5,11 @@ const SearchBox = ({ searchTerm, onChange }) => {
   return (
     <div className="input-group input-group-lg mt-2" style={{ width: "340px" }}>
       <div className="input-group-prepend">
-        <span className="input-group-text" id="inputGroup-sizing-lg">
+        <span
+          className="input-group-text"
+          style={{ backgroundColor: "#ffc107" }}
+          id="inputGroup-sizing-lg"
+        >
           <FontAwesomeIcon icon="search" />
         </span>
       </div>
