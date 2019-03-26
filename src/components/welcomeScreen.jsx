@@ -21,9 +21,7 @@ const WelcomeScreen = ({ location }) => {
           </p>
           <hr className="my-4" />
           <p>
-            <b>
-              Note: These are the trending Gif images provided by giphy.com.
-            </b>
+            <b>Note: "All Gif images are Powered By GIPHY"</b>
           </p>
           <h4> Are you excited?</h4>
           <Link

@@ -1,14 +1,21 @@
 import React, { Component } from "react";
-import { trendingGiphs, searchGiphs } from "../services/giphysService";
+import {
+  trendingGiphs,
+  loadMoreTrendingGiphs,
+  searchGiphs
+} from "../services/giphysService";
 import NavBar from "./common/navBar";
 import SearchBox from "./common/searchBox";
 import GiphyCard from "./common/giphyCard";
+import NextButton from "./common/nextButton";
 
 class Giphys extends Component {
   state = {
     trendingGiphsData: [],
     giphys: [],
-    searchTerm: ""
+    searchTerm: "",
+    count: "",
+    offset: 0
   };
 
   componentDidMount() {
@@ -23,6 +30,9 @@ class Giphys extends Component {
 
   async setGiphyImages() {
     const { data: trendingGiphsData } = await trendingGiphs();
+    const offset = trendingGiphsData.pagination.offset;
+    const count = trendingGiphsData.pagination.count;
+
     const giphys = [];
 
     trendingGiphsData.data.map(g => {
@@ -35,7 +45,7 @@ class Giphys extends Component {
       return giphys.push(giphysData);
     });
 
-    this.setState({ giphys });
+    this.setState({ giphys, count, offset });
   }
 
   handleSearch = async query => {
@@ -74,6 +84,33 @@ class Giphys extends Component {
     ));
   }
 
+  handleNextPage = async () => {
+    const { count: limit, giphys, offset } = this.state;
+
+    const updateOffset = limit + offset;
+
+    const { data: nextTrendingGiphys } = await loadMoreTrendingGiphs(
+      updateOffset
+    );
+
+    const updateGiphys = [...giphys];
+
+    nextTrendingGiphys.data.map(ntg => {
+      const nextTrendingGiphsData = {};
+
+      nextTrendingGiphsData.id = ntg.id;
+      nextTrendingGiphsData.title = ntg.title;
+      nextTrendingGiphsData.url = ntg.images.downsized_large.url;
+
+      return updateGiphys.push(nextTrendingGiphsData);
+    });
+
+    this.setState({
+      offset: updateOffset,
+      giphys: updateGiphys
+    });
+  };
+
   render() {
     const { searchTerm } = this.state;
     return (
@@ -83,6 +120,9 @@ class Giphys extends Component {
           <SearchBox searchTerm={searchTerm} onChange={this.handleSearch} />
           <div style={{ marginTop: "5px" }} className="giphCards">
             {this.renderGiphCards()}
+            <center>
+              <NextButton nextPage={this.handleNextPage} />
+            </center>
           </div>
         </center>
       </React.Fragment>

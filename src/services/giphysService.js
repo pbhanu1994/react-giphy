@@ -12,6 +12,16 @@ export function trendingGiphs() {
   return http.get(`${trendingApiEndPoint}?api_key=${apiKey}`);
 }
 
+export function loadMoreTrendingGiphs(offset) {
+  return http.get(`${trendingApiEndPoint}?api_key=${apiKey}&offset=${offset}`);
+}
+
 export function searchGiphs(searchTerm) {
   return http.get(`${searchApiEndPoint}?api_key=${apiKey}&q=${searchTerm}`);
+}
+
+export function loadMoreSearchGiphs(searchTerm, offset) {
+  return http.get(
+    `${searchApiEndPoint}?api_key=${apiKey}&q=${searchTerm}&offset=${offset}`
+  );
 }
