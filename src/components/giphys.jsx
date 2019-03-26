@@ -42,9 +42,12 @@ class Giphys extends Component {
     this.setState({ searchTerm: query });
 
     try {
-      const { data: searchGiphsData } = await searchGiphs(query);
+      let { data: searchGiphsData } = await searchGiphs(query);
+      const { data: trendingGiphsData } = await trendingGiphs();
 
-      console.log(searchGiphsData);
+      searchGiphsData.data.length === 0 &&
+        (searchGiphsData = trendingGiphsData);
+
       const giphys = [];
 
       searchGiphsData.data.map(sg => {
