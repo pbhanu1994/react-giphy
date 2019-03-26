@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import {
   trendingGiphs,
   loadMoreTrendingGiphs,
-  searchGiphs
+  searchGiphs,
+  loadMoreSearchGiphs
 } from "../services/giphysService";
 import NavBar from "./common/navBar";
 import SearchBox from "./common/searchBox";
@@ -85,17 +86,21 @@ class Giphys extends Component {
   }
 
   handleNextPage = async () => {
-    const { count: limit, giphys, offset } = this.state;
+    const { count: limit, giphys, searchTerm, offset } = this.state;
 
-    const updateOffset = limit + offset;
+    let updateOffset = limit + offset;
 
-    const { data: nextTrendingGiphys } = await loadMoreTrendingGiphs(
-      updateOffset
-    );
+    let nextTrendingGiphys = "";
+
+    if (searchTerm.length === 0) {
+      nextTrendingGiphys = await loadMoreTrendingGiphs(updateOffset);
+    } else {
+      nextTrendingGiphys = await loadMoreSearchGiphs(searchTerm, updateOffset);
+    }
 
     const updateGiphys = [...giphys];
 
-    nextTrendingGiphys.data.map(ntg => {
+    nextTrendingGiphys.data.data.map(ntg => {
       const nextTrendingGiphsData = {};
 
       nextTrendingGiphsData.id = ntg.id;
