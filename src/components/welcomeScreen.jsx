@@ -20,7 +20,11 @@ const WelcomeScreen = ({ location }) => {
             This is a simple React Front-end application for showing Gif images
           </p>
           <hr className="my-4" />
-          <p>Note: These are the trending Gif images provided by giphy.com.</p>
+          <p>
+            <b>
+              Note: These are the trending Gif images provided by giphy.com.
+            </b>
+          </p>
           <h4> Are you excited?</h4>
           <Link
             to={{

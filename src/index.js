@@ -10,8 +10,6 @@ import "bootstrap/dist/css/bootstrap.css";
 
 library.add(faSearch);
 
-console.log(process.env);
-
 ReactDOM.render(
   <BrowserRouter>
     <App />

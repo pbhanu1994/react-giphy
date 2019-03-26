@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { trendingGiphs, searchGiphs } from "../services/giphysService";
+import NavBar from "./common/navBar";
 import SearchBox from "./common/searchBox";
 import GiphyCard from "./common/giphyCard";
 
@@ -38,7 +39,6 @@ class Giphys extends Component {
   }
 
   handleSearch = async query => {
-    console.log(query);
     this.setState({ searchTerm: query });
 
     try {
@@ -79,9 +79,11 @@ class Giphys extends Component {
     return (
       <React.Fragment>
         <center>
-          <h2>Giphys</h2>
+          <NavBar username={this.props.location.state.username} />
           <SearchBox searchTerm={searchTerm} onChange={this.handleSearch} />
-          <div className="giphCards">{this.renderGiphCards()}</div>
+          <div style={{ marginTop: "5px" }} className="giphCards">
+            {this.renderGiphCards()}
+          </div>
         </center>
       </React.Fragment>
     );
