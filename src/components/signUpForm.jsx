@@ -27,23 +27,19 @@ class SignUp extends Component {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(authUser => {
-        console.log("Response", authUser);
+        console.log("Response Sign up", authUser);
         this.setState({ ...this.state });
-        this.props.history.push("/welcome");
+        this.props.history.push("/giphys");
       })
       .catch(error => this.setState({ error }));
     console.log("Submit called");
   };
 
   render() {
-    console.log("Props here", this.props);
     return (
       <React.Fragment>
         <NavBar />
         <h1>Sign Up</h1>
-        {/* <FirebaseContext.Consumer>
-          {firebase => <signUpForm firebase={firebase} />}
-        </FirebaseContext.Consumer> */}
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -91,7 +87,7 @@ class SignUp extends Component {
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Sign Up
+            Sign up
           </button>
         </form>
       </React.Fragment>

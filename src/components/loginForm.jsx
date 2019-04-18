@@ -1,10 +1,38 @@
 import React, { Component } from "react";
 import NavBar from "./common/navBar";
+import firebase from "firebase/app";
+import "firebase/auth";
+import { config } from "../firebase/firebase";
 
 class Login extends Component {
+  constructor() {
+    super();
+    firebase.initializeApp(config);
+  }
+
   state = {
     email: "",
-    password: ""
+    password: "",
+    error: ""
+  };
+
+  handleChange = ({ currentTarget }) => {
+    this.setState({ [currentTarget.name]: currentTarget.value });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+    const { email, password } = this.state;
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(authUser => {
+        console.log("Response Sign in", authUser);
+        this.setState({ ...this.state });
+        this.props.history.push("/giphys");
+      })
+      .catch(error => this.setState({ error: error.message }));
+    console.log("Submit called");
   };
 
   render() {
@@ -12,13 +40,15 @@ class Login extends Component {
       <React.Fragment>
         <NavBar />
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input
               type="email"
+              name="email"
               className="form-control"
-              id="exampleInputEmail1"
+              id="email"
+              onChange={this.handleChange}
               aria-describedby="emailHelp"
               placeholder="Enter email"
             />
@@ -27,26 +57,18 @@ class Login extends Component {
             </small>
           </div>
           <div className="form-group">
-            <label for="exampleInputPassword1">Password</label>
+            <label htmlFor="password">Password</label>
             <input
               type="password"
+              name="password"
               className="form-control"
-              id="exampleInputPassword1"
+              id="password"
+              onChange={this.handleChange}
               placeholder="Password"
             />
           </div>
-          <div className="form-group form-check">
-            <input
-              type="checkbox"
-              className="form-check-input"
-              id="exampleCheck1"
-            />
-            <label className="form-check-label" for="exampleCheck1">
-              Check me out
-            </label>
-          </div>
           <button type="submit" className="btn btn-primary">
-            Submit
+            Sign in
           </button>
         </form>
       </React.Fragment>
