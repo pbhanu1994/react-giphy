@@ -29,13 +29,20 @@ class Login extends Component {
       .then(authUser => {
         console.log("Response Sign in", authUser);
         this.setState({ ...this.state });
-        this.props.history.push("/giphys");
+        // this.props.history.push("/giphys");
       })
       .catch(error => this.setState({ error: error.message }));
     console.log("Submit called");
   };
 
   render() {
+    let user = firebase.auth().currentUser;
+    if (user !== null) {
+      console.log("User here", user);
+    } else {
+      console.log("No user found in Firebase");
+    }
+
     return (
       <React.Fragment>
         <NavBar />

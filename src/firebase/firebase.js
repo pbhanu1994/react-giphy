@@ -41,5 +41,6 @@ class Firebase {
 
   doSignOut = () => this.auth.signOut();
 }
+
 export { config };
 export default Firebase;

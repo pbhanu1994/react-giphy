@@ -7,6 +7,9 @@ const NavBar = ({ username }) => {
       <Link className="navbar-brand" to="/">
         <b>GiphyApp</b>
       </Link>
+      <Link className="navbar-brand" to="/login">
+        <b>Sign in</b>
+      </Link>
       <span className="navbar-brand mb-0 h3">{username}</span>
     </nav>
   );
